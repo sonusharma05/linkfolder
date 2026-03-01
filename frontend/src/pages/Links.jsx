@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputBox from "../components/InputBox";
 import TopBar from "../components/TopBar";
 import Button from "../components/Button";
 import InputBoxToo from "../components/InputBoxToo";
+import axios from "axios";
 
 function CopyButton() {
   const [items,setItems] = useState([]);
-  const [link,setLink]  = useState("")
+  const [link,setLink]  = useState([])
 
   
 
@@ -15,7 +16,27 @@ function CopyButton() {
   }
   const textToCopy = "Hello Sonu 🚀";
 
-  
+  useEffect(()=>{
+    const fetch = async()=>{
+      try{
+        const token = localStorage.getItem("token")
+        const res = await axios.get(
+          "http://localhost:3000/links",{
+            headers:{
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
+        setLink(res.data.links)
+      }
+      
+      catch(err){
+        console.log("error fetching links",err)
+      };
+      
+    }
+    fetch();
+  },[items,link])
 
 
   return (
@@ -30,27 +51,22 @@ function CopyButton() {
       {
         items.map((item)=>(<InputBoxToo key={item} />))
       }
+      {
+        link.map((it)=>(
+          <div key={it._id}
+          className="bg-gray-700 text-white p-2 rounded mb-2">
+          {it.link}
+          </div>
+        ))
+      }
         
         
       </div>
     </div>
+    
 
     </div>
-    // <div>
-    //   <div>
-    //     <p>{textToCopy}</p>
-      
-    //   <button onClick={handleCopy}>
-    //     {copied ? "Copied!" : "Copy"}
-    //   </button>
-    //   </div>
-
-    //   <div>
-    //     <input type="text" placeholder="enter the link"></input>
-
-    //   </div>
-    // </div>
-    
+   
   );
 }
 
