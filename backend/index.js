@@ -23,7 +23,7 @@ app.get("/links", authmiddleware,async (req, res) => {
   });
 });
 
-app.post("/link",authmiddleware, async (req, res) => {
+app.post("/links",authmiddleware, async (req, res) => {
   const link = req.body.link;
   const store = await Link.create({
     userId : req.userId,
@@ -34,6 +34,16 @@ app.post("/link",authmiddleware, async (req, res) => {
     data: store,
   });
 });
+app.delete("/links",authmiddleware,async(req,res)=>{
+
+  const link = req.body.link;
+  const deleteit = await Link.findOneAndDelete({link});
+  if(!deleteit){
+    return res.status(404).json({message:"no link "})
+  }
+  res.json({message:"link deleted successfully"})
+})
+
 
 app.post("/signin", async (req, res) => {
   const { success } = signinSchema.safeParse(req.body);

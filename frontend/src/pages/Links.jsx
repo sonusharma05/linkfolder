@@ -14,7 +14,6 @@ function CopyButton() {
   const onClick=()=>{
     setItems([...items,items.length+1])
   }
-  const textToCopy = "Hello Sonu 🚀";
 
   useEffect(()=>{
     const fetch = async()=>{
@@ -36,7 +35,7 @@ function CopyButton() {
       
     }
     fetch();
-  },[items,link])
+  },[])
 
 
   return (
@@ -49,15 +48,10 @@ function CopyButton() {
     <div className="flex h-screen  p-10">
       <div>
       {
-        items.map((item)=>(<InputBoxToo key={item} />))
+        items.map((item)=>(<InputBoxToo  key={item} />))
       }
       {
-        link.map((it)=>(
-          <div key={it._id}
-          className="bg-gray-700 text-white p-2 rounded mb-2">
-          {it.link}
-          </div>
-        ))
+        link.map((it)=>(<InputBox url = {it.link}/>))
       }
         
         

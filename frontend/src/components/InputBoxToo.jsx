@@ -6,7 +6,7 @@ export default function InputBoxToo( {Text,onChange}){
     const token = localStorage.getItem("token")
     const save =async() => {
         await axios.post(
-                    "http://localhost:3000/link",
+                    "http://localhost:3000/links",
                     {
                       link:text
                     },
