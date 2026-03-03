@@ -35,7 +35,7 @@ function CopyButton() {
       
     }
     fetch();
-  },[])
+  },[link])
 
 
   return (

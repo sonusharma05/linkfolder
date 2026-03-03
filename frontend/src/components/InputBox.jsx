@@ -1,9 +1,13 @@
 import axios from "axios";
 
 import { useRef, useState } from "react"
+import { useSetRecoilState } from "recoil";
+import { linksState } from "../store/atoms/linkAtom";
+
 
 export default function InputBox({url}){
     const [text,setText] = useState("");
+    const setLinks = useSetRecoilState(linksState)
 
     const spanRef = useRef(null)
     const copy = async()=>{
@@ -17,29 +21,27 @@ export default function InputBox({url}){
     const edit = async()=>{
        setText()
     }
-    const deleted = async()=>{
-        try{
-            const link = spanRef.current.innerText
-        
-            await axios.delete("http://localhost:3000/links",
-            {
-                      link:link
-                    },
-                    {
-                      headers: {
-                        "Content-Type": "application/json"
-                      }
-                    }
-            );
-            // setLinks(prev=>prev.filter(l=> l!==link));
+    const deleted = async () => {
+  try {
+    const link = spanRef.current.innerText;
+    const token = localStorage.getItem("token");
 
-        }catch(err){
-            console.log("delete failed",err);
-        }
-        
-        
-       
-    }
+    console.log(link);
+
+    await axios.delete("http://localhost:3000/links", {
+      data: { link: link },   // 👈 body goes inside data
+      headers: {
+        "Content-Type": "application/json", // 👈 needs quotes
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setLinks(prev => prev.filter(l => l !== link));
+
+  } catch (err) {
+    console.log("delete failed", err);
+  }
+};
     return(
         <div className=" bg-gray-600 m-2 rounded-md p-2 w-200 border-white border">
             <div className="flex justify-between">
