@@ -4,12 +4,19 @@ import TopBar from "../components/TopBar";
 import Button from "../components/Button";
 import InputBoxToo from "../components/InputBoxToo";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CopyButton() {
   const [items,setItems] = useState([]);
   const [link,setLink]  = useState([])
+  const navigate = useNavigate();
 
-  
+   const onClickLogout = ()=>{
+    localStorage.removeItem("token")
+    navigate("/")
+    console.log("button clicked")
+
+}
 
   const onClick=()=>{
     setItems([...items,items.length+1])
@@ -43,7 +50,7 @@ function CopyButton() {
       <div className="flex justify-between border-b p-3 border-white">
                   <p className="text-3xl font-bold text-white">Link Folder</p>
                   <Button onClick={onClick} buttonText="Add New"></Button>
-                  <Button buttonText="Sign Out"></Button>
+                  <Button  onClick={onClickLogout} buttonText="Sign Out"></Button>
               </div>
     <div className="flex h-screen  p-10">
       <div>

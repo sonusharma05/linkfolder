@@ -1,10 +1,12 @@
 import { useState } from "react"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Signin(){
     const [email,setEmail]  = useState("");
     const [password,setPassword] = useState("");
     const [remember,setRemember] = useState(false);
+    const navigate = useNavigate()
 
     return(
        <div className="bg-gray-800">
@@ -40,7 +42,8 @@ export default function Signin(){
           <div>
             <div>
               <button className=" w-full rounded-md border-2 text-xl border-white bg-gray-600 px-18 py-2 text-white hover:text-black hover:text-2xl hover:font-bold" onClick={async()=>{
-                const res =await axios.post(
+                const res =
+                await axios.post(
                     "http://localhost:3000/signin",
                     {
                       username: email,
@@ -54,13 +57,14 @@ export default function Signin(){
                   );
                   localStorage.setItem("token",res.data.token)
                   console.log(res.data)
+                  navigate("/links")
                 
               }}>Sign In</button>
             </div>
           </div>
           <div className="flex justify-center pt-2">
             <span className="text-gray-500 mr-1"> don't have a account? </span>
-            <a href="#" className=" text-white hover:text-black "> signup </a>
+            <a href="/signup" className=" text-white hover:text-black "> signup </a>
           
         </div>
       </div>

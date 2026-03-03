@@ -5,7 +5,7 @@ export default function InputBoxToo( {Text,onChange}){
     const [text,setText] = useState("");
     const token = localStorage.getItem("token")
     const save =async() => {
-        await axios.post(
+        try{await axios.post(
                     "http://localhost:3000/links",
                     {
                       link:text
@@ -16,7 +16,11 @@ export default function InputBoxToo( {Text,onChange}){
                          Authorization: `Bearer ${token}`
                       }
                     }
-                  );
+                  );}
+                  catch(err){
+
+                    console.log(err)
+                  }
 
     };
      return(

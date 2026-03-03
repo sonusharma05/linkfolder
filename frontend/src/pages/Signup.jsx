@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 export default function Signup(){
   const [username,SetUsername]=useState("")
@@ -8,6 +9,7 @@ export default function Signup(){
   const [password,setPassword] = useState("");
   const [Age,setAge] = useState(0);
   const [phoneno,setPhoneno] = useState("");
+  const navigate = useNavigate()
   return(
     <div className="bg-gray-800">
       <div className="flex justify-center h-screen  items-center  ">
@@ -56,7 +58,9 @@ export default function Signup(){
           <div className="flex justify-center mt-2">
             <span className="text-gray-500"> already have an account?</span>
             
-            <button className="text-white">Sign In</button>
+            <button onClick={()=>{
+              navigate("/")
+            }} className="text-white">Sign In</button>
           </div>
         </div>
         
