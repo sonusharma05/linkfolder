@@ -23,7 +23,7 @@ export default function InputBox({url}){
         try{
             const token= localStorage.getItem("token")
             const res = await axios.put(
-                `http://localhost:3000/links/${link._id}`,
+                `http://13.220.45.53:3000/links/${link._id}`,
                 {link:newLink},
                 {
                     headers:{
@@ -47,7 +47,7 @@ export default function InputBox({url}){
 
     console.log(link);
 
-    await axios.delete("http://localhost:3000/links", {
+    await axios.delete("http://13.220.45.53:3000/links", {
       data: { link: link },   // 👈 body goes inside data
       headers: {
         "Content-Type": "application/json", // 👈 needs quotes

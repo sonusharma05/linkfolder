@@ -40,7 +40,7 @@ export default function Signup(){
           <div>
             <button onClick={async()=>{
               try{
-                const res = await axios.post("http://localhost:3000/signup",{
+                const res = await axios.post("http://13.220.45.53:3000/signup",{
                   username,
                   Email: email,
                   password,
