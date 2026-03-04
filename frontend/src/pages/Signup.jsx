@@ -49,6 +49,12 @@ export default function Signup(){
                 });
 
                 console.log("SUCCESS",res.data);
+                if(res.data.msg=="account created successfully"){
+                  navigate("/")
+                }
+                else{
+                    navigate("/error")
+                }
               }catch(err){
                 console.log("ERROR",err.response?.data);
               }

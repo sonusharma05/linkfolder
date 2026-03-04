@@ -26,7 +26,7 @@ export default function InputBoxToo( {Text,onChange}){
      return(
         <div className=" bg-gray-600 m-2 rounded-md p-2 w-200 border-white border">
             <div className="flex justify-between">
-                <input  className="w-190 text-white"  type="text" placeholder="Enter link" onChange={(e)=>setText(e.target.value)}></input>
+                <input  className="w-190 text-white" defaultValue={Text} type="text" placeholder="Enter link" onChange={(e)=>setText(e.target.value)}></input>
                 
                 <button className=" hover:text-white hover:cursor-pointer " onClick={save}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke="currentColor" className="size-6">

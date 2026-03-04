@@ -1,19 +1,13 @@
 import Button from "./Button";
-import {useNavigate}   from "react-router-dom"
+// import {useNavigate}   from "react-router-dom"
 
 
-export default function TopBar(){
-    const navigate = useNavigate();
-    const onClickLogout = ()=>{
-    localStorage.removeItem("token")
-    navigate("/")
-    console.log("button clicked")
-
-}
+export default function TopBar({onClickOne,onClickLogout}){
+ 
     return(
-        <div className="flex justify-between border-b p-3 border-white">
+        <div className=" fixed top-0 left-0 w-full flex justify-between border-b p-3 border-white">
             <p className="text-3xl font-bold text-white">Link Folder</p>
-            <Button onClick={random} buttonText="Add New newq thsi alkfjasdfljasdfl;kasdflkasdflkj; "></Button>
+            <Button onClick={onClickOne} buttonText="Add New  "></Button>
             <Button onClick={onClickLogout} buttonText="Sign Out"></Button>
         </div>
     )

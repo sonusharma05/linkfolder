@@ -1,13 +1,14 @@
 import axios from "axios";
 
 import { useRef, useState } from "react"
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { linksState } from "../store/atoms/linkAtom";
 
 
 export default function InputBox({url}){
     const [text,setText] = useState("");
     const setLinks = useSetRecoilState(linksState)
+    // const link = useRecoilValue(linksState)
 
     const spanRef = useRef(null)
     const copy = async()=>{
@@ -19,7 +20,25 @@ export default function InputBox({url}){
         }
     }
     const edit = async()=>{
-       setText()
+        try{
+            const token= localStorage.getItem("token")
+            const res = await axios.put(
+                `http://localhost:3000/links/${link._id}`,
+                {link:newLink},
+                {
+                    headers:{
+                        Authorization:`Bearer ${token}`
+                    }
+                }
+            )
+            
+        }
+        catch(err){
+            console.log("update failed",err)
+
+        }
+        
+       
     }
     const deleted = async () => {
   try {

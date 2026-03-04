@@ -44,6 +44,36 @@ app.delete("/links",authmiddleware,async(req,res)=>{
   res.json({message:"link deleted successfully"})
 })
 
+app.put(" /links/:id", authmiddleware,async(req,res) =>{
+  try{
+    const linkId = req.params.id;
+    const newLink = req.body.link;
+
+    const updated = await Link.findOneAndUpdate({
+      _id:linkId,
+      userId: req.userId
+
+    },{
+      link:newLink
+    },{
+      new:true
+    }
+  
+  )
+  if(!updated){
+    return res.status(404).json({message:"Link not found"})
+  }
+  res.json({
+    message:"Link Updated Successfully",
+    data:updated
+  })
+
+  }catch(err){
+    res.status(500).json({message:"updated failed"})
+  }
+
+})
+
 
 app.post("/signin", async (req, res) => {
   const { success } = signinSchema.safeParse(req.body);
@@ -63,7 +93,7 @@ app.post("/signin", async (req, res) => {
       msg: "invalid credintailas",
     });
   }
-  const token = jwt.sign({UserId:findUser._id},process.env.SECRET_KEY)
+  const token = jwt.sign({userId:findUser._id},process.env.SECRET_KEY)
   
   return res.json({
     msg: "logged in successfully",
