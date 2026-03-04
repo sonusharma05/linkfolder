@@ -26,7 +26,7 @@ function CopyButton() {
       try{
         const token = localStorage.getItem("token")
         const res = await axios.get(
-          "http://localhost:3000/links",{
+          "http://13.220.45.53:3000/links",{
             headers:{
               Authorization: `Bearer ${token}`
             }
