@@ -23,7 +23,7 @@ export default function InputBox({url}){
         try{
             const token= localStorage.getItem("token")
             const res = await axios.put(
-                `http://13.220.45.53:3000/links/${link._id}`,
+                `http://34.225.222.164/links/${link._id}`,
                 {link:newLink},
                 {
                     headers:{

@@ -44,7 +44,7 @@ export default function Signin(){
               <button className=" w-full rounded-md border-2 text-xl border-white bg-gray-600 px-18 py-2 text-white hover:text-black hover:text-2xl hover:font-bold" onClick={async()=>{
                 const res =
                 await axios.post(
-                    "http://13.220.45.53:3000/signin",
+                    "http://34.225.222.164/signin",
                     {
                       username: email,
                       password: password
