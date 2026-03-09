@@ -47,7 +47,7 @@ export default function InputBox({url}){
 
     console.log(link);
 
-    await axios.delete("http://13.220.45.53:3000/links", {
+    await axios.delete("http://34.225.222.164/links", {
       data: { link: link },   // 👈 body goes inside data
       headers: {
         "Content-Type": "application/json", // 👈 needs quotes
